@@ -12,9 +12,6 @@ def format_paise(paise):
 def make_member(name):
     return {"name": name}
 
-def member_to_text(member):
-    return "Member(name=" + repr(member["name"]) + ")"
-
 def make_expense(description, amount, paid_by, shares, split_type="equal"):
     return {
         "description": description,
