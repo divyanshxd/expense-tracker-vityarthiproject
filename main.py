@@ -4,13 +4,27 @@ def main():
     print(f"Expense Tracker!")
     expenses =[]
 
-    expense = get_user_expenses()
-    expenses.append(expense)
-    print(f"Saving the Expense: {expense['name']} in ({expense['cat']}) - Rs.{expense['amount']}")
-
     summrize(expenses)
 
-    exit_menu()
+    while True:
+        print("\nMain Menu")
+        print("1. Add an expense")
+        print("2. summrize expense")
+        print("3. Exit")
+
+        inp = input("Enter your choice [1 - 3]: ").strip()
+
+        if inp == "1":
+            expense = get_user_expenses()
+            expenses.append(expense)
+            print(f"Saving the Expense: {expense['name']} in ({expense['cat']}) - Rs.{expense['amount']}")
+        elif inp == "2":
+            summrize(expenses)
+        elif inp == "3":
+            exit_menu(expenses)
+            break
+        else:
+            print("Invalid choice. Please try again!")
 
 
 def get_user_expenses():
@@ -56,8 +70,9 @@ def summrize(expenses):
     total_spent = sum([x['amount'] for x in expenses])
     print(f"[] Total spent: {total_spent}")
 
-def exit_menu():
-    print("")
+def exit_menu(expenses):
+    print(f"You recorded {len(expenses)} expenses on this run.")
+    print("gg goodbye!")
 
 if __name__ == "__main__":
     main()
