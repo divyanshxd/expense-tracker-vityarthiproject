@@ -8,6 +8,7 @@ def main():
     summrize(expenses)
 
     while True:
+        print("------------------------------------------")
         print("\n Main Menu")
         print("1. Add Expenses")
         print("2. View Expense")
@@ -17,22 +18,28 @@ def main():
         print("6. Exit")
 
         inp = input("Enter your choice [1 - 6]: ").strip()
+        print("------------------------------------------")
 
         if inp == "1":
+            print("------------------------------------------")
             expense = get_expenses()
             expenses.append(expense)
             print(f"Saving the Expense: {expense_msg(expense)}")
             budget_status(expenses, budget)
         elif inp == "2":
+            print("------------------------------------------")
             view_expenses(expenses)
             budget_status(expenses, budget)
         elif inp == "3":
+            print("------------------------------------------")
             delete_expense(expenses)
             budget_status(expenses, budget)
         elif inp == "4":
+            print("------------------------------------------")
             summrize(expenses)
             budget_status(expenses, budget)
         elif inp == "5":
+            print("------------------------------------------")
             budget = int(input("Enter your budget: "))
         elif inp == "6":
             exit(expenses)
@@ -76,8 +83,8 @@ def delete_expense(expenses):
     i = choose_expense(expenses, "delete")
     if not i:
         return
-    confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
 
+    confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
 
     if confirm in ("y", "yes"):
         removed = expenses.pop(i)
@@ -93,19 +100,12 @@ def choose_expense(expenses, edit):
     for i, expense in enumerate(expenses):
         print(f" {i + 1}. {expense['name']} ({expense['cat']}) - {expense['amount']}")
     while True:
-        option = input(f"Choose expense number [1 - {len(expenses)}]")
+        option = input(f"Choose expense number [1 - {len(expenses)}]: ")
         if option == "":
             print("Cancelled.")
             return
-        try:
-            index = int(option) - 1
-        except ValueError:
-            print("Invalid number. try again captain.")
-            continue
-        if index in range(len(expenses)):
-            return index
         else:
-            print("invalid number. try again captain.")
+            return int(option) - 1
 
 
 def get_expenses():
@@ -150,8 +150,7 @@ def summrize(expenses):
     print("[] Expenses by category:")
     for cat, amount in amount_by_cat.items():
         percent = amount / total * 100
-        bar
-        "#" * max(1, round(percent / 5))
+        bar = "#" * max(1, round(percent / 5))
         print(f" [] {cat}: {amount} ({percent}%) {bar}")
 
     print(f"[] Total spent: {total}")
