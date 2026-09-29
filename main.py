@@ -4,7 +4,7 @@ from expense import NewExpense
 def main():
     print(f"Expense Tracker!")
     expenses = []
-    budget = ""
+    budget = 5000
     summrize(expenses)
 
     while True:
@@ -13,7 +13,8 @@ def main():
         print("2. View Expense")
         print("3. Delete Expense")
         print("4. View Summary")
-        print("5. Exit")
+        print("5. Edit Budget")
+        print("6. Exit")
 
         inp = input("Enter your choice [1 - 3]: ").strip()
 
@@ -32,6 +33,8 @@ def main():
             summrize(expenses)
             budget_status(expenses, budget)
         elif inp == "5":
+            budget = int(input("Enter your budget: "))
+        elif inp == "6":
             exit(expenses)
             break
         else:
@@ -41,9 +44,8 @@ def main():
 def budget_status(expense, budget=5000):
     total = total_expenses(expense)
     print(f"[] budget: Rs.{budget}, spent: {total}")
-    if (total - budget) < 1000:
-        print(f" [] WARNING: you are close to exceed the budget by {total - budget}.")
-    elif total > budget:
+
+    if (total > budget):
         print(f" [] WARNING: you have exceeded the budget by {total - budget}")
     else:
         print(f" [] Remaining Budget: {budget - total}")
@@ -74,14 +76,14 @@ def delete_expense(expenses):
     i = choose_expense(expenses, "delete")
     if not i:
         return
-confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
+    confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
 
 
-if confirm in ("y", "yes"):
-    removed = expenses.pop(i)
-    print(f"Deleted {expense_msg(removed)}")
-else:
-    print("Cancelled.")
+    if confirm in ("y", "yes"):
+        removed = expenses.pop(i)
+        print(f"Deleted {expense_msg(removed)}")
+    else:
+        print("Cancelled.")
 
 
 def choose_expense(expenses, edit):
@@ -122,9 +124,9 @@ def get_expenses():
 
         if category_index in range(len(categories)):
             new_expense = NewExpense(
-                name=expense_name,
+                name=name,
                 category=categories[category_index],
-                amount=expense_ammount,
+                amount=ammount,
             )
             return new_expense
         else:
