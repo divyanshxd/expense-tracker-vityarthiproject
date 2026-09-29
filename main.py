@@ -20,7 +20,7 @@ def main():
         if inp == "1":
             expense = get_expenses()
             expenses.append(expense)
-            print(f"Saving the Expense: {expense['name']} in ({expense['cat']}) - Rs.{expense['amount']}")
+            print(f"Saving the Expense: {expense_msg(expense)}")
             budget_status(expenses, budget)
         elif inp == "2":
             view_expenses(expenses)
@@ -74,7 +74,7 @@ def delete_expense(expenses):
     i = choose_expense(expenses, "delete")
     if not i:
         return
-    confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
+confirm = input(f"[] Delete {expense_msg(expenses[i])} ? (y/n)").lower().strip()
 
 
 if confirm in ("y", "yes"):
@@ -108,8 +108,8 @@ def choose_expense(expenses, edit):
 
 def get_expenses():
     print("Getting User Expenses")
-    expense_name = input("Enter expense name: ")
-    expense_ammount = float(input("Enter expense amount: "))
+    name = input("Enter expense name: ")
+    ammount = float(input("Enter expense amount: "))
 
     categories = ["Food", "Home", "Work", "Entertainment", "Misc"]
 
