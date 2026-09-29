@@ -20,9 +20,7 @@ def main():
         if inp == "1":
             expense = get_expenses()
             expenses.append(expense)
-            print(
-                f"Saving the Expense: {expense['name']} in ({expense['cat']}) - Rs.{expense['amount']}"
-            )
+            print(f"Saving the Expense: {expense['name']} in ({expense['cat']}) - Rs.{expense['amount']}")
             budget_status(expenses, budget)
         elif inp == "2":
             view_expenses(expenses)
@@ -120,9 +118,7 @@ def get_expenses():
         for i, category_name in enumerate(categories):
             print(f"{i + 1}. {category_name}")
 
-        category_index = (
-            int(input(f"Enter categrory number [1 - {len(categories)}]: ")) - 1
-        )
+        category_index = (int(input(f"Enter categrory number [1 - {len(categories)}]: ")) - 1)
 
         if category_index in range(len(categories)):
             new_expense = NewExpense(
