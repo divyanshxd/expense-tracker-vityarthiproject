@@ -16,7 +16,7 @@ def main():
         print("5. Edit Budget")
         print("6. Exit")
 
-        inp = input("Enter your choice [1 - 3]: ").strip()
+        inp = input("Enter your choice [1 - 6]: ").strip()
 
         if inp == "1":
             expense = get_expenses()
